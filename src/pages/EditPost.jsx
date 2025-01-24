@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useParams, Link, data } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import useSWR, { mutate } from "swr";
 
@@ -24,7 +24,6 @@ const EditPost = () => {
         navigate("/login");
         return;
       }
-      console.log(data?.author_email);
 
       const response = await fetch(url, {
         headers: {
@@ -49,13 +48,13 @@ const EditPost = () => {
   useEffect(() => {
     if (data) {
       reset({
-        title: data.title,
-        content: data.content,
+        title: data.title || "",
+        content: data.content || "",
       });
     }
   }, [data, reset]);
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (formData) => {
     setApiError(null);
     const token = localStorage.getItem("token");
 
@@ -68,7 +67,7 @@ const EditPost = () => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify(data),
+          body: JSON.stringify(formData),
         }
       );
 
