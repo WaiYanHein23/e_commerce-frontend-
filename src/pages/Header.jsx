@@ -1,63 +1,45 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import img1 from "../assets/th (8).jpg";
+import CartStore from "../store/CartStore";
 
 const Header = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    // Check if user is logged in and fetch user_name
-    const token = localStorage.getItem("token");
-    const user_name = localStorage.getItem("user_name");
-    setIsLoggedIn(!!token && !!user_name);
-  }, []);
-
+  const { carts } = CartStore();
   return (
     <div>
-      <nav className="bg-blue-800 p-6">
-        <ul className="flex space-x-4 justify-around items-center">
-          <li>
-            <Link to="/" className="text-white hover:text-gray-300">
-              Home
-            </Link>
-          </li>
+      <nav className=" p-6 border  border:shadow-lg ...">
+        <div className="flex justify-between items-center">
+          <div>
+            <img src={img1} alt="" />
+          </div>
+          <div>
+            <ul className="flex space-x-4 justify-end items-center">
+              <>
+                <li>
+                  <Link to="" className=" text-sm hover:text-blue-300">
+                    Mens
+                  </Link>
+                </li>
+                <li>
+                  <Link to="" className=" text-sm hover:text-blue-300">
+                    Women
+                  </Link>
+                </li>
 
-          {isLoggedIn ? (
-            <>
-              <li>
-                <Link to="/post" className="text-white hover:text-gray-300">
-                  Posts
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/profile"
-                  className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors"
-                >
-                  Profile
-                </Link>
-              </li>
-            </>
-          ) : (
-            <>
-              <li>
-                <Link
-                  to="/login"
-                  className="bg-white px-4 py-2 rounded-lg hover:text-red-600 transition-colors"
-                >
-                  Login
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/register"
-                  className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors"
-                >
-                  Register
-                </Link>
-              </li>
-            </>
-          )}
-        </ul>
+                <li>
+                  <Link to="" className=" text-sm hover:text-blue-300">
+                    Kids
+                  </Link>
+                </li>
+              </>
+              <Link to="/myCart" className="border border-black px-3 py-2">
+                My Cart
+                <span className=" absolute top-6 right-13 -translate-x-0 -translate-y-1 bg-red-600  px-1 py-1 text-xs">
+                  {carts.length}
+                </span>
+              </Link>
+            </ul>
+          </div>
+        </div>
       </nav>
     </div>
   );

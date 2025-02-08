@@ -4,11 +4,13 @@ import ErrorPage from "./pages/ErrorPage";
 import { createBrowserRouter } from "react-router-dom";
 import Login from "./Auth/Login";
 import Register from "./Auth/Register";
-import Post from "./pages/Post";
 import Profile from "./pages/Profile";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NonAuthRoute from "./components/NonAuthRoute";
-import EditPost from "./pages/EditPost";
+import Product from "./pages/Product";
+import Shop from "./pages/Shop";
+import MyCart from "./pages/MyCart";
+import Checkout from "./pages/Checkout";
 
 export const router = createBrowserRouter([
   {
@@ -37,14 +39,6 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/post",
-        element: (
-          <ProtectedRoute>
-            <Post />
-          </ProtectedRoute>
-        ),
-      },
-      {
         path: "/profile",
         element: (
           <ProtectedRoute>
@@ -53,12 +47,20 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/post/:id/edit",
-        element: (
-          <ProtectedRoute>
-            <EditPost />
-          </ProtectedRoute>
-        ),
+        path: "/shop",
+        element: <Shop />,
+      },
+      {
+        path: "/product/:id",
+        element: <Product />,
+      },
+      {
+        path: "/myCart",
+        element: <MyCart />,
+      },
+      {
+        path: "/checkOut",
+        element: <Checkout />,
       },
     ],
   },
