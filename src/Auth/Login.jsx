@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -32,13 +33,18 @@ const Login = () => {
         throw new Error(result.message || "Login failed");
       }
 
+      if (result.message) {
+        toast.error(result.message);
+      } else {
+        toast.success("Login successful");
+      }
       // Store token in localStorage
       localStorage.setItem("token", result.token);
       localStorage.setItem("user_name", result.user.name);
       localStorage.setItem("user_email", result.user.email);
 
       // Redirect to home page after successful login
-      navigate("/post");
+      navigate("/dashboard");
     } catch (error) {
       setApiError(error.message);
     } finally {
@@ -134,15 +140,6 @@ const Login = () => {
               >
                 Remember me
               </label>
-            </div>
-
-            <div className="text-sm">
-              <a
-                href="#"
-                className="font-medium text-blue-600 hover:text-blue-500"
-              >
-                Forgot your password?
-              </a>
             </div>
           </div>
 

@@ -5,7 +5,7 @@ const NonAuthRoute = ({ children }) => {
 
   if (token) {
     // If user is logged in, redirect to posts page
-    return <Navigate to="/post" replace />;
+    return <Navigate to="/shop" replace />;
   }
 
   // If user is not logged in, show the requested page (login/register)

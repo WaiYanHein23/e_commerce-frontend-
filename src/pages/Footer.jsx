@@ -44,7 +44,7 @@ const Footer = () => {
           </div>
 
           {/* Existing Company Info Section */}
-          <div className="grid grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-4">
+          <div className="grid grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-3">
             <div>
               <h2 className="mb-6 text-sm font-semibold uppercase dark:text-white">
                 Company
@@ -89,23 +89,7 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-            <div>
-              <h2 className="mb-6 text-sm font-semibold uppercase dark:text-white">
-                Quick Links
-              </h2>
-              <ul className="text-gray-500 font-medium">
-                <li className="mb-4">
-                  <a href="#" className="hover:underline">
-                    Login
-                  </a>
-                </li>
-                <li className="mb-4">
-                  <a href="#" className="hover:underline">
-                    Register
-                  </a>
-                </li>
-              </ul>
-            </div>
+
             <div>
               <h2 className="mb-6 text-sm font-semibold uppercase dark:text-white">
                 Get In Touch
