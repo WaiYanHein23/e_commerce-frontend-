@@ -105,6 +105,17 @@ const ProductStore=create((set)=>({
           images: [img4, img2, img4, img3],
           rating: { rate: 5.0 },
         },
+        {
+          id: "10",
+          name: "Blue Leather Jacket",
+          price: 40.00,
+          description: "Trendy leather jacket for a bold look.",
+          sizes: ["M", "L", "XL"],
+          "brand": "Reebok",
+          colors: ["Black"],
+          images: [img4, img2, img4, img3],
+          rating: { rate: 5.0 },
+        },
       ]
     
 }))

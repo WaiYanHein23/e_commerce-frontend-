@@ -1,21 +1,15 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import CartStore from "../store/CartStore";
 import ProductStore from "../store/ProductStore";
+import CategoryShow from "./category/CategoryShow";
+import BrandShow from "./brand/BrandShow";
+import useSWR from "swr";
 
 const Dashboard = () => {
-  const navigate = useNavigate();
   const { carts } = CartStore();
   const { products } = ProductStore();
   const [activeTab, setActiveTab] = useState("overview");
-
-  // Add logout handler
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user_name");
-    localStorage.removeItem("user_email");
-    navigate("/login");
-  };
 
   // Calculate total revenue
   const totalRevenue = carts.reduce((total, cart) => {
@@ -28,13 +22,6 @@ const Dashboard = () => {
 
   // Get total products
   const totalProducts = products.length;
-
-  // Mock data for categories and brands
-  const categories = [
-    { id: 1, name: "Electronics", productCount: 120 },
-    { id: 2, name: "Clothing", productCount: 85 },
-    { id: 3, name: "Home & Kitchen", productCount: 64 },
-  ];
 
   const brands = [
     { id: 1, name: "Brand A", productCount: 45 },
@@ -260,81 +247,15 @@ const Dashboard = () => {
                 </div>
               )}
 
-              {activeTab === "categories" && (
-                <div>
-                  <h3 className="text-lg font-semibold mb-4">Categories</h3>
-                  <div className="overflow-x-auto">
-                    <table className="min-w-full divide-y divide-gray-200">
-                      <thead>
-                        <tr>
-                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                            Category ID
-                          </th>
-                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                            Name
-                          </th>
-                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                            Product Count
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-gray-200">
-                        {categories.map((category) => (
-                          <tr key={category.id}>
-                            <td className="px-6 py-4 whitespace-nowrap">
-                              #{category.id}
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap">
-                              {category.name}
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap">
-                              {category.productCount}
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              )}
+              {/* Category List */}
+              <CategoryShow activeTab={activeTab} setActiveTab={setActiveTab} />
 
-              {activeTab === "brands" && (
-                <div>
-                  <h3 className="text-lg font-semibold mb-4">Brands</h3>
-                  <div className="overflow-x-auto">
-                    <table className="min-w-full divide-y divide-gray-200">
-                      <thead>
-                        <tr>
-                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                            Brand ID
-                          </th>
-                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                            Name
-                          </th>
-                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                            Product Count
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-gray-200">
-                        {brands.map((brand) => (
-                          <tr key={brand.id}>
-                            <td className="px-6 py-4 whitespace-nowrap">
-                              #{brand.id}
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap">
-                              {brand.name}
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap">
-                              {brand.productCount}
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              )}
+              {/* Brand List */}
+              <BrandShow
+                activeTab={activeTab}
+                setActiveTab={setActiveTab}
+                brands={brands}
+              />
 
               {activeTab === "shipping" && (
                 <div>
