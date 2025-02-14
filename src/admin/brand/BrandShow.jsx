@@ -17,7 +17,7 @@ const BrandShow = ({ activeTab }) => {
   } = useForm({
     defaultValues: {
       name: "",
-      status: "Active",
+      status: "",
     },
   });
 
@@ -148,12 +148,18 @@ const BrandShow = ({ activeTab }) => {
             )}
 
             <select
-              {...register("status")}
-              className="border p-2 rounded mb-2 ms-2"
+              {...register("status", { required: "Status is required" })}
+              className="border p-2 rounded"
             >
-              <option value="Active">Active</option>
-              <option value="Inactive">Inactive</option>
+              <option value="" disabled>
+                Select Status
+              </option>
+              <option value="1">Active</option>
+              <option value="0">Inactive</option>
             </select>
+            {errors.status && (
+              <p className="text-red-500">{errors.status.message}</p>
+            )}
 
             <button
               type="submit"
